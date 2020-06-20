@@ -23,7 +23,7 @@ class Post(models.Model):
     #Maybe add a genre???
 
     def __str__(self):
-        return self.name
+        return self.title
 
     class Meta:
         ordering = ['-date']
@@ -32,11 +32,12 @@ class Post(models.Model):
 #=========Message Model=========
 class Message(models.Model):
     content = models.CharField(max_length=500)
-    post = models.ForeignKey(Post, on_delete=CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
     date = models.DateField('Message Date')
+    post_name = Post.title
 
     def __str__(self):
-        return self.name
+        return f"From {self.post_name} on {self.date}"
 
     class Meta:
         ordering = ['-date']
@@ -61,8 +62,8 @@ class Student(models.Model):
 
     def __str__(self):
         # Nice method for obtaining the friendly value of a Field.choice
-        return f"{self.get_cohort_display()}" f"{self.get_program_display()}"
+        return self.name
 
 
     def get_absolute_url(self):
-        return reverse('toys_detail', kwargs={'pk': self.id})
+        return reverse('posts_detail', kwargs={'pk': self.id})
