@@ -32,7 +32,7 @@ class Post(models.Model):
 #=========Message Model=========
 class Message(models.Model):
     content = models.CharField(max_length=500)
-    post = models.ForeignKey(Post, on_delete=CASCADE)
+    post = models.ForeignKey(Post, on_delete=models.CASCADE)
     date = models.DateField('Message Date')
 
     def __str__(self):
@@ -65,4 +65,4 @@ class Student(models.Model):
 
 
     def get_absolute_url(self):
-        return reverse('toys_detail', kwargs={'pk': self.id})
+        return reverse('posts_detail', kwargs={'pk': self.id})
