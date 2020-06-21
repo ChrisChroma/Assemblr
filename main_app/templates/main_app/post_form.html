@@ -1,3 +1,4 @@
+<!-- THIS IS A TEST TEMPLATE -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,12 +8,10 @@
 </head>
 <body>
     {% if object %}
-    <h1>Edit {{object.name}}</h1>
+    <h1>Edit <span class="teal-text">{{object.title}}</span></h1>
   {% else %}
-    <h1>Add Cat</h1>
+    <h1>Add Post</h1>
   {% endif %}
-
-  
   <!-- Leaving the action empty makes the form post to the same url used to display it -->
   <form action="" method="post">
     <!-- Django requires the following for security purposes -->
@@ -23,9 +22,5 @@
     </table>
     <input type="submit" value="Submit!" class="btn">
   </form>
-
-
-
-
 </body>
 </html>
