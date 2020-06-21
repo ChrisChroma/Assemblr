@@ -14,12 +14,24 @@ COHORTS = (
     ('SAN', 'San Diego'),
     ('DEN', 'Denver'),
 )
+
+GENRE = (
+    ('HTML', 'HTML'),
+    ('CSS', 'CSS'),
+    ('JS', 'JavaScript'),
+    ('UX', 'UX Design'),
+    ('PI', 'Project Ideas'),
+)
 #=========Post Model=========
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.CharField(max_length=500)
     date = models.DateField('Post Date')
-    #Maybe add a genre???
+    genre = models.CharField(
+        max_length=4,
+        choices=GENRE,
+        default=GENRE[0][0]
+    )
 
     def __str__(self):
         return self.title
