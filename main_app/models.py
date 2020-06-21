@@ -3,17 +3,16 @@ from django.urls import reverse
 from datetime import date
 
 
-# Create your models here.
 PROGRAMS = (
     ('s', 'Software Engineer'),
     ('u', 'UX Design'),
 )
 COHORTS = (
-    ('atx', 'Austin'),
-    ('dal', 'Dallas'),
-    ('lan', 'Los Angeles'),
-    ('san', 'San Diego'),
-    ('den', 'Denver'),
+    ('ATX', 'Austin'),
+    ('DAL', 'Dallas'),
+    ('LAN', 'Los Angeles'),
+    ('SAN', 'San Diego'),
+    ('DEN', 'Denver'),
 )
 #=========Post Model=========
 class Post(models.Model):
@@ -25,6 +24,9 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    def get_absolute_url(self):
+        return reverse('detail', kwargs={'post_id': self.id})
+
     class Meta:
         ordering = ['-date']
 
@@ -34,10 +36,9 @@ class Message(models.Model):
     content = models.CharField(max_length=500)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     date = models.DateField('Message Date')
-    post_name = Post.title
 
     def __str__(self):
-        return f"From {self.post_name} on {self.date}"
+        return f"From {self.post} on {self.date}"
 
     class Meta:
         ordering = ['-date']
@@ -59,10 +60,9 @@ class Student(models.Model):
   )
     messages = models.ManyToManyField(Message)
 
-
     def __str__(self):
-        # Nice method for obtaining the friendly value of a Field.choice
-        return self.name
+        # Nice method for obtaining the friendly value of a Field.choices
+        return f"{self.name} - {self.get_cohort_display().upper()}"
 
 
     def get_absolute_url(self):
