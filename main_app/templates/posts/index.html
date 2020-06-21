@@ -16,16 +16,19 @@
             {% for post in posts %}
 
           <tr>
+          <a href="{% url 'detail' post.id %}">
             <th scope="row">{{ post.date }}</th>
             <td>{{ post.title }}</td>
             <td>{{ post.content }}</td>
             <td>{{ post.genre }}</td>
+            </a>
             <td>
                 <a href="{% url 'posts_update' post.id %}">Edit</a>
             </td>
             <td>
                 <a href="{% url 'posts_delete' post.id %}">Delete</a>
             </td>
+         
           </tr>
 
           {% endfor %}
