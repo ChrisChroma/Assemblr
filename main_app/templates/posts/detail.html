@@ -19,9 +19,9 @@
         <a href="{% url 'posts_delete' post.id %}">Delete</a>
       </div>
     </div>
+    <a href="{% url 'message_details' message_id %}">
     <div class="col s6">
     <form action="{% url 'add_message' post.id %}" method="post">
-    {% comment %} <a href="{% url 'message_details' message.id %}"> {% endcomment %}
     {% csrf_token %}
     {{ message_form.as_p }}
       <input type="submit" class="btn" value="Add Message">
@@ -40,7 +40,7 @@
         {% endfor %}
       </tbody>
     </table>
-  {% comment %} </a> {% endcomment %}
+  </a>
   </div>
 </div>
 
