@@ -19,6 +19,28 @@
         <a href="{% url 'posts_delete' post.id %}">Delete</a>
       </div>
     </div>
+    <div class="col s6">
+    <form action="{% url 'add_message' post.id %}" method="post">
+    {% csrf_token %}
+    {{ message_form.as_p }}
+            <input type="submit" class="btn" value="Add Message">
+  </form>
+    <table class="striped">
+      <thead>
+        <tr><th>Date</th><th>Message</th></tr>
+      </thead>
+      <tbody>
+        {% for message in post.message_set.all %}
+          <tr>
+            <td>{{message.date}}</td>
+            <td>{{message.post}}</td>
+            <td>{{message.content}}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
 
 
 {% endblock %}
