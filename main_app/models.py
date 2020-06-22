@@ -1,8 +1,8 @@
 from django.db import models
 from django.urls import reverse
-
+from datetime import date
 from django.utils import timezone
-
+from django.contrib.auth.models import User
 
 
 PROGRAMS = (
@@ -24,12 +24,13 @@ GENRE = (
     ('UX', 'UX Design'),
     ('PI', 'Project Ideas'),
 )
-#=========Post Model=========
+# =========Post Model=========
+
+
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.CharField(max_length=500)
-    # created = models.DateTimeField(auto_now_add=True)
-    created = timezone.now()
+    created_at = models.DateTimeField(auto_now_add=True)
 
     genre = models.CharField(
         max_length=4,
@@ -43,56 +44,56 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('detail', kwargs={'post_id': self.id})
 
-    # class Meta:
-    #     ordering = ['-date']
+    class Meta:
+        ordering = ['-created_at']
 
-#=========Message Model=========
+# =========Message Model=========
+
 
 class Message(models.Model):
     content = models.CharField(max_length=500)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    # created = models.DateTimeField(auto_now_add=True)
-    created = timezone.now()
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"From {self.post} on {self.created}"
 
-    # class Meta:
-    #     ordering = ['-date']
+    class Meta:
+        ordering = ['-created_at']
 
 
-#========= Reply Model=========
+# ========= Reply Model=========
 class Reply(models.Model):
     title = models.CharField(max_length=100)
     post = models.ForeignKey(Message, on_delete=models.CASCADE)
-    # created = models.DateTimeField(auto_now_add=True)
-    created = timezone.now()
+    created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"From {self.post} on {self.created}"
 
-    # class Meta:
-    #     ordering = ['-date']
+    class Meta:
+        ordering = ['-created_at']
 
-#=========Student Model=========
+# =========Student Model=========
+
+
 class Student(models.Model):
     name = models.CharField(max_length=50)
     cohort = models.CharField(
-            max_length=3,
-            choices=COHORTS,
-            default=COHORTS[0][0]
-  )    
+        max_length=3,
+        choices=COHORTS,
+        default=COHORTS[0][0]
+    )
     program = models.CharField(
         max_length=1,
         choices=PROGRAMS,
         default=PROGRAMS[0][0]
-  )
+    )
     messages = models.ManyToManyField(Message)
 
     def __str__(self):
         # Nice method for obtaining the friendly value of a Field.choices
         return f"{self.name} - {self.get_cohort_display().upper()}"
-
 
     def get_absolute_url(self):
         return reverse('posts_detail', kwargs={'pk': self.id})

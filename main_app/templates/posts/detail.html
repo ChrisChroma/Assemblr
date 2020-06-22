@@ -21,6 +21,7 @@
     </div>
     <div class="col s6">
     <form action="{% url 'add_message' post.id %}" method="post">
+    {% comment %} <a href="{% url 'message_details' message.id %}"> {% endcomment %}
     {% csrf_token %}
     {{ message_form.as_p }}
       <input type="submit" class="btn" value="Add Message">
@@ -32,13 +33,14 @@
       <tbody>
         {% for message in post.message_set.all %}
           <tr>
-            <td>{{message.date}}</td>
+            <td>{{message.created_at}}</td>
 
             <td>{{message.content}}</td>
           </tr>
         {% endfor %}
       </tbody>
     </table>
+  {% comment %} </a> {% endcomment %}
   </div>
 </div>
 
