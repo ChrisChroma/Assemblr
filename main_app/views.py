@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from .models import Post, Student
+from .models import Post, Student, Message
 from .forms import MessageForm
 
 
@@ -51,3 +51,7 @@ def add_message(request, post_id):
         new_message.post_id = post_id
         new_message.save()
     return redirect('detail', post_id=post_id)
+
+# def message_details(request, message_id):
+#     message = Message.objects.get(id=message_id)
+#     return render(request, 'message/message_details.html', {'message': message})
