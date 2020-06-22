@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
-from datetime import date
+
+from django.utils import timezone
+
 
 
 PROGRAMS = (
@@ -26,7 +28,9 @@ GENRE = (
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.CharField(max_length=500)
-    date = models.DateField('Post Date')
+    # created = models.DateTimeField(auto_now_add=True)
+    created = timezone.now()
+
     genre = models.CharField(
         max_length=4,
         choices=GENRE,
@@ -39,23 +43,36 @@ class Post(models.Model):
     def get_absolute_url(self):
         return reverse('detail', kwargs={'post_id': self.id})
 
-    class Meta:
-        ordering = ['-date']
-
+    # class Meta:
+    #     ordering = ['-date']
 
 #=========Message Model=========
+
 class Message(models.Model):
     content = models.CharField(max_length=500)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    date = models.DateField('Message Date')
+    # created = models.DateTimeField(auto_now_add=True)
+    created = timezone.now()
 
     def __str__(self):
-        return f"From {self.post} on {self.date}"
+        return f"From {self.post} on {self.created}"
 
-    class Meta:
-        ordering = ['-date']
+    # class Meta:
+    #     ordering = ['-date']
 
 
+#========= Reply Model=========
+class Reply(models.Model):
+    title = models.CharField(max_length=100)
+    post = models.ForeignKey(Message, on_delete=models.CASCADE)
+    # created = models.DateTimeField(auto_now_add=True)
+    created = timezone.now()
+
+    def __str__(self):
+        return f"From {self.post} on {self.created}"
+
+    # class Meta:
+    #     ordering = ['-date']
 
 #=========Student Model=========
 class Student(models.Model):
