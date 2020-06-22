@@ -2,48 +2,19 @@
 {% block content %}
 
 
-{% comment %} <table class="table">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Title</th>
-            <th>Content</th>
-            <th>Job Type</th>
-            <th>Edit</th>
-            <th>Delete</th>
-          </tr>
-        </thead>
-        <tbody>
-            {% for post in posts %}
 
-          <tr>
-            <th scope="row">{{ post.date }}</th>
-            <td>{{ post.title }}</td>
-            <td>{{ post.content }}</td>
-            <td>{{ post.genre }}</td>
-            <td>
-                <a href="{% url 'posts_update' post.id %}">Edit</a>
-            </td>
-            <td>
-                <a href="{% url 'posts_delete' post.id %}">Delete</a>
-            </td>
-          </tr>
-
-          {% endfor %}
-
-        </tbody>
-      </table>
-</br> {% endcomment %}
 
 {% for post in posts %}
 <div class="row">
     <div class="col s12 m6">
       <div class="card black darken-1">
+      <a href="{% url 'detail' post.id %}">
         <div class="card-content white-text">
           <span class="card-title">{{ post.title }}</span>
           <p>{{ post.date }}</p>
           <p>{{ post.content }}</p>
         </div>
+        </a>
         <div class="card-action">
           <a href="{% url 'posts_update' post.id %}">Edit</a>
         <a href="{% url 'posts_delete' post.id %}">Delete</a>

@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
-from .models import Post, Student, Message
+from .models import Post, Student
+from .forms import MessageForm
 
 
 
@@ -36,6 +37,14 @@ def posts_index(request):
 def posts_detail(request, post_id):
     post = Post.objects.get(id=post_id)
     return render(request, 'posts/detail.html', {'post' : post} )
+
+def add_message(request, post_id):
+  form = MessageForm(request.POST)
+  if form.is_valid():
+    new_message = form.save(commit=False)
+    new_message.post_id = post_id
+    new_message.save()
+  return redirect('detail', post_id= post_id)
 
 
 
