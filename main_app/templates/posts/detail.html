@@ -23,7 +23,7 @@
     <form action="{% url 'add_message' post.id %}" method="post">
     {% csrf_token %}
     {{ message_form.as_p }}
-            <input type="submit" class="btn" value="Add Message">
+        <tr><input type="textbox"></tr> <input type="submit" class="btn" value="Add Message">
   </form>
     <table class="striped">
       <thead>
