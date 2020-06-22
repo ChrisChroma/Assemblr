@@ -14,5 +14,6 @@ urlpatterns = [
 
     path('posts/<int:post_id>/add_message/', views.add_message, name='add_message'),
 
-    # path('message/<int:message_id>/', views.message_details, name="message_details"),
+    path('posts/<int:post_id>/index_message/', views.message_details, name="message_details"),
+    
 ]
