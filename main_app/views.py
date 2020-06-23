@@ -54,6 +54,3 @@ def add_message(request, post_id):
         new_message.save()
     return redirect('detail', post_id=post_id)
 
-def message_details(request, message_id):
-    message = Message.objects.get(id=message_id)
-    return render(request, 'messages/message_details.html', {'message': message})
