@@ -31,6 +31,8 @@ class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.CharField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
 
     genre = models.CharField(
         max_length=4,
@@ -58,8 +60,8 @@ class Message(models.Model):
     def __str__(self):
         return f"From {self.post} on {self.created}"
 
-    def get_absolute_url(self):
-        return reverse('message_detail', kwargs={'message_id': self.id})
+    # def get_absolute_url(self):
+    #     return reverse('message_detail', kwargs={'message_id': self.id})
 
     class Meta:
         ordering = ['-created_at']
