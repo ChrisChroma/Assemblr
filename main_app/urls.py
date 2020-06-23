@@ -15,4 +15,6 @@ urlpatterns = [
     path('posts/<int:post_id>/add_message/', views.add_message, name='add_message'),
 
     path('messages/<int:pk>/', views.MessageDetail.as_view(), name="message_detail"),
+    path('accounts/signup/', views.signup, name='signup'),
+
 ]
