@@ -9,9 +9,8 @@
     <div class="card">
       <div class="card-content">
         <span class="card-title">{{ post.title }}</span>
-        <!-- <p>Date: {{ post.date }}</p> -->
+        <p>Date: {{ post.created_at }}</p>
         <p>Content: {{ post.content }}</p>
-        <p>Job Type: {{ post.genre }}</p>
        
       </div>
       <div class="card-action">
@@ -25,6 +24,7 @@
     {{ message_form.as_p }}
       <input type="submit" class="btn" value="Add Message">
   </form>
+      <a href="{% url 'message_details' post.id%}">
     <table class="striped">
       <thead>
         <tr><th>Date</th><th>Message</th></tr>
@@ -38,6 +38,7 @@
           </tr>
         {% endfor %}
       </tbody>
+      </a>
     </table>
   </div>
 </div>

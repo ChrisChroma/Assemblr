@@ -60,8 +60,8 @@ class Message(models.Model):
     def __str__(self):
         return f"From {self.post} on {self.created}"
 
-    # def get_absolute_url(self):
-    #     return reverse('message_detail', kwargs={'message_id': self.id})
+    def get_absolute_url(self):
+        return reverse('message_details', kwargs={'message_id': self.id})
 
     class Meta:
         ordering = ['-created_at']
