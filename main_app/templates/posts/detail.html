@@ -2,7 +2,7 @@
 {% block content %}
 
 
-    <h4>Post Details</h4>
+<h4>Post Details</h4>
 
 <div class="row">
   <div class="col s6">
@@ -19,26 +19,29 @@
       </div>
     </div>
     <div class="col s6">
-    <form action="{% url 'add_message' post.id %}" method="post">
-    {% csrf_token %}
-    {{ message_form.as_p }}
-      <input type="submit" class="btn" value="Add Message">
-  </form>
-      <a href="{% url 'message_details' post.id%}">
+      <form action="{% url 'add_message' post.id %}" method="post">
+        {% csrf_token %}
+        {{ message_form.as_p }}
+        <input type="submit" class="btn" value="Reply to This Post">
+    </form>
     <table class="striped">
       <thead>
-        <tr><th>Date</th><th>Message</th></tr>
+        <tr>
+          <th>Date</th>
+          <th>Message Title</th>
+          <th>Message Deatils</th>
+        </tr>
       </thead>
       <tbody>
         {% for message in post.message_set.all %}
-          <tr>
-            <td>{{message.created_at}}</td>
-
-            <td>{{message.content}}</td>
-          </tr>
-        {% endfor %}
-      </tbody>
-      </a>
+        <tr>
+          
+          <td>{{message.created_at}}</td>
+          <td>{{message.title}}</td>
+          <td><a style='color:blue' href="{% url 'message_detail' message.id %}">Reply</a></td>
+        </tr>
+          {% endfor %}
+        </tbody>
     </table>
   </div>
 </div>
