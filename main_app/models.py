@@ -24,15 +24,41 @@ GENRE = (
     ('UX', 'UX Design'),
     ('PI', 'Project Ideas'),
 )
-# =========Post Model=========
+
+# =========Student Model=========
+class Student(models.Model):
+    name = models.CharField(max_length=50)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    cohort = models.CharField(
+        max_length=3,
+        choices=COHORTS,
+        default=COHORTS[0][0]
+    )
+    program = models.CharField(
+        max_length=1,
+        choices=PROGRAMS,
+        default=PROGRAMS[0][0]
+    )
+    # messages = models.ManyToManyField(Message)
+
+    def __str__(self):
+        # Nice method for obtaining the friendly value of a Field.choices
+        return f"{self.name} - {self.get_cohort_display().upper()}"
+
+    def get_absolute_url(self):
+        return reverse('posts_detail', kwargs={'pk': self.id})
 
 
+
+
+# ========= Post Model =========
 class Post(models.Model):
     title = models.CharField(max_length=100)
     content = models.CharField(max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     genre = models.CharField(
         max_length=4,
@@ -49,56 +75,32 @@ class Post(models.Model):
     class Meta:
         ordering = ['-created_at']
 
-# =========Message Model=========
 
-
-class Message(models.Model):
-    content = models.CharField(max_length=500)
+# ========= Thread Model =========
+class Thread(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"From {self.post} on {self.created}"
-
-    # def get_absolute_url(self):
-    #     return reverse('message_detail', kwargs={'message_id': self.id})
-
-    class Meta:
-        ordering = ['-created_at']
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
 
 
-# ========= Reply Model=========
-class Reply(models.Model):
+# ========= Message Model =========
+class Message(models.Model):
     title = models.CharField(max_length=100)
-    post = models.ForeignKey(Message, on_delete=models.CASCADE)
+    content = models.TextField(max_length=500)
+    thread = models.ForeignKey(Thread, on_delete=models.CASCADE)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
+    
 
     def __str__(self):
-        return f"From {self.post} on {self.created}"
-
-    class Meta:
-        ordering = ['-created_at']
-
-# =========Student Model=========
-
-
-class Student(models.Model):
-    name = models.CharField(max_length=50)
-    cohort = models.CharField(
-        max_length=3,
-        choices=COHORTS,
-        default=COHORTS[0][0]
-    )
-    program = models.CharField(
-        max_length=1,
-        choices=PROGRAMS,
-        default=PROGRAMS[0][0]
-    )
-    messages = models.ManyToManyField(Message)
-
-    def __str__(self):
-        # Nice method for obtaining the friendly value of a Field.choices
-        return f"{self.name} - {self.get_cohort_display().upper()}"
+        return f"From post n.{self.post_id} message id = {self.id} on {self.created_at}"
 
     def get_absolute_url(self):
-        return reverse('posts_detail', kwargs={'pk': self.id})
+        return reverse('message_detail', kwargs={'pk': self.id})
+
+    class Meta:
+        ordering = ['-created_at']
+
+
+
+
+

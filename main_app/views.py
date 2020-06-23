@@ -1,7 +1,11 @@
 from django.shortcuts import render, redirect
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 
-from .models import Post, Student, Message
+# from django.views.generic.edit import CreateView, UpdateView, DeleteView
+# from django.views.generic import ListView, DetailView
+
+
+from .models import Post, Student, Message, Thread
 from .forms import MessageForm
 
 
@@ -9,7 +13,7 @@ from .forms import MessageForm
 
 class PostCreate(CreateView):
     model = Post
-    fields = '__all__'
+    fields = ['title', 'content']
 
 
 class PostUpdate(UpdateView):
@@ -22,7 +26,8 @@ class PostDelete(DeleteView):
     model = Post
     success_url = '/posts/'
 
-
+class MessageDetail(DetailView):
+    model = Message
 
 # ========= Functions ===================
 
@@ -44,6 +49,12 @@ def posts_detail(request, post_id):
     post = Post.objects.get(id=post_id)
     message_form = MessageForm()
     return render(request, 'posts/detail.html', {'post': post, 'message_form': message_form})
+
+
+# def message_details(request, post_id, message_id):
+#     post = Post.objects.get(id=post_id)
+#     message = Message.objects.get(id=message_id)
+#     return render(request, 'yourtemplate', {'post': post, 'message': message})
 
 
 def add_message(request, post_id):
