@@ -26,6 +26,7 @@
                         <li><a href="{% url 'signup' %}">Sign Up</a></li>
                         <li><a href="{% url 'login' %}">Log In</a></li>
                         {% endif %}
+                        <li><img alt="Assemblr Logo" width="50" src={% static '/images/logo.png' %}></li>
                 </ul>
             </div>
         </nav>
@@ -35,21 +36,16 @@
 
 
 <main>
+
         {% block content %}
         {% endblock %}
 </main>
-
 <footer class="page-footer">
-          <div class="footer-copyright">
-            <div class="container">
-            © 2020 Python Pirates
-            <a class="grey-text text-lighten-4 right" href="#!"><img alt="Assemblr Logo" src="https://imgur.com/a/mPwkTnp"> </a>
-            </div>
-          </div>
+    <div class="footer-copyright">© 2020 Python Pirates</div>
+    <div class=""></div>
 </footer>
 </body>
 </html>
-
 
 
 
