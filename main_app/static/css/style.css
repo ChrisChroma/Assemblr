@@ -46,3 +46,7 @@ body {
   .about-column {
     flex: 50%;
   }
+
+  .col s3 {
+    color: chartreuse;
+  }
