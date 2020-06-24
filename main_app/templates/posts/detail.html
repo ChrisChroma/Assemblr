@@ -21,6 +21,11 @@
         <a href="{% url 'posts_delete' post.id %}">Delete</a>
       </div>
     </div>
+
+
+
+
+    
     <div class="col s6">
       <form action="{% url 'add_message' post.id %}" method="post">
         {% csrf_token %}
@@ -32,13 +37,12 @@
         <tr>
           <th>Date</th>
           <th>Message Title</th>
-          <th>Message Deatils</th>
+          <th>Message Details</th>
         </tr>
       </thead>
       <tbody>
         {% for message in post.message_set.all %}
         <tr>
-          
           <td>{{message.created_at}}</td>
           <td>{{message.title}}</td>
           <td><a style='color:blue' href="{% url 'message_detail' message.id %}">Reply</a></td>

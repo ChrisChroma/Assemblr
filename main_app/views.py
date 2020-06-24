@@ -2,12 +2,14 @@ from django.shortcuts import render, redirect
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+
 
 # from django.views.generic.edit import CreateView, UpdateView, DeleteView
 # from django.views.generic import ListView, DetailView
 
 
-from .models import Post, Student, Message, Thread
+from .models import Post, Student, Message
 from .forms import MessageForm, StudentForm
 
 
@@ -22,6 +24,15 @@ class PostCreate(CreateView):
         form.instance.user = self.request.user  # form.instance is the cat
         # Let the CreateView do its job as usual
         return super().form_valid(form)
+
+# class MessageCreate(CreateView):
+#     model = Message
+#     fields = ['title', 'content']
+#     def form_valid(self, form):
+#     # Assign the logged in user (self.request.user)
+#         form.instance.student = self.request.user  # form.instance is the cat
+#         # Let the CreateView do its job as usual
+#         return super().form_valid(form)
 
 
 
@@ -66,13 +77,15 @@ def posts_detail(request, post_id):
 #     return render(request, 'yourtemplate', {'post': post, 'message': message})
 
 
-def add_message(request, thread_id):
+def add_message(request, post_id):
     form = MessageForm(request.POST)
+    print(request)
+
     if form.is_valid():
         new_message = form.save(commit=False)
-        new_message.thread_id = thread_id
+        new_message.post_id = post_id
         new_message.save()
-    return redirect('detail', thread_id=thread_id)
+    return redirect('detail', post_id=post_id)
 
 
 
