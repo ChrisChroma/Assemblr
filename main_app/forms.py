@@ -4,7 +4,7 @@ from .models import Message, Student
 class MessageForm(ModelForm):
     class Meta:
         model = Message
-        fields = ['title', 'content']
+        fields = ['comment']
 
 
 class StudentForm(ModelForm):

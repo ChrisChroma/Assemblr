@@ -15,6 +15,10 @@ urlpatterns = [
     # path('messages/create/', views.MessageCreate.as_view(), name='add_message'),
     # path('posts/<int:post_id>/add_message/', views.MessageCreate.as_view(), name='add_message'),
     path('posts/<int:post_id>/add_message/', views.add_message, name='add_message'),
+
+
+    path('messages/<int:pk>/update/', views.MessageUpdate.as_view(), name='messages_update'),
+    path('messages/<int:pk>/delete/', views.MessageDelete.as_view(), name='messages_delete'),
     
 
     path('messages/<int:pk>/', views.MessageDetail.as_view(), name="message_detail"),
