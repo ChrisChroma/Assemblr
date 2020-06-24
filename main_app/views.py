@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
@@ -19,6 +19,8 @@ from .forms import MessageForm, StudentForm
 class PostCreate(CreateView):
     model = Post
     fields = ['title', 'content']
+    success_url = '/posts/'
+
     def form_valid(self, form):
     # Assign the logged in user (self.request.user)
         form.instance.user = self.request.user  # form.instance is the cat
@@ -38,7 +40,7 @@ class PostCreate(CreateView):
 
 class PostUpdate(UpdateView):
     model = Post
-    fields = ['title', 'content', 'date']
+    fields = ['title', 'content']
     success_url = '/posts/'
 
 
@@ -46,8 +48,24 @@ class PostDelete(DeleteView):
     model = Post
     success_url = '/posts/'
 
+
 class MessageDetail(DetailView):
     model = Message
+
+
+class MessageUpdate(UpdateView):
+    model = Message
+    fields = ['comment']
+
+    def get_success_url(self):
+        return reverse('detail', kwargs={'post_id': self.object.post.id})
+
+
+class MessageDelete(DeleteView):
+    model = Message
+    
+    def get_success_url(self):
+        return reverse('detail', kwargs={'post_id': self.object.post.id})
 
 # ========= Functions ===================
 
@@ -79,8 +97,6 @@ def posts_detail(request, post_id):
 
 def add_message(request, post_id):
     form = MessageForm(request.POST)
-    print(request)
-
     if form.is_valid():
         new_message = form.save(commit=False)
         new_message.post_id = post_id

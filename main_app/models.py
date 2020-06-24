@@ -85,8 +85,8 @@ class Post(models.Model):
     
 # ========= Message Model =========
 class Message(models.Model):
-    title = models.CharField(max_length=100)
-    content = models.TextField(max_length=500)
+    # title = models.CharField(max_length=100) -- Scrapping--
+    comment = models.TextField(max_length=1000)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     # student = models.ForeignKey(Student, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
