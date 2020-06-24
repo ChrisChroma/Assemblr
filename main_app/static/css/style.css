@@ -15,7 +15,7 @@ body {
   }
 
   .page-footer {
-      background-color: black;
+    background-color: black;
   }
 
   a {
@@ -39,6 +39,10 @@ body {
     background-color: black;
   }
 
-
-
+  .about-row {
+    display: flex;
+  }
   
+  .about-column {
+    flex: 50%;
+  }
