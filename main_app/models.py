@@ -18,17 +18,20 @@ COHORTS = (
 )
 
 SKILLS = (
+    ('Job Posting', 'Job Posting'),
+    ('Help Wanted', 'Help wanted'),
     ('HTML', 'HTML'),
     ('CSS', 'CSS'),
     ('JS', 'JavaScript'),
     ('UX', 'UX Design'),
+    ('Node', 'Node.JS'),
+    ('SQL', 'SQL'),
     ('PI', 'Project Ideas'),
 )
 
 # =========Student Model=========
 class Student(models.Model):
     name = models.CharField(max_length=50)
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     cohort = models.CharField(
         max_length=3,
@@ -59,10 +62,8 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    # student = models.ForeignKey(Student, on_delete=models.CASCADE)
-
     skill = models.CharField(
-        max_length=4,
+        max_length=11,
         choices=SKILLS,
         default=SKILLS[0][0]
     )
@@ -70,28 +71,24 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
+    # def __str__(self):
+    #     return f"{self.get_skill_display()}"
+
+
     def get_absolute_url(self):
         return reverse('detail', kwargs={'post_id': self.id})
 
     class Meta:
         ordering = ['-created_at']
 
-
-# ========= Thread Model =========
-# class Thread(models.Model):
-#     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-#     student = models.ForeignKey(Student, on_delete=models.CASCADE)
-
     
 # ========= Message Model =========
 class Message(models.Model):
-    # title = models.CharField(max_length=100) -- Scrapping--
     comment = models.TextField(max_length=1000)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
-    # student = models.ForeignKey(Student, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-
+    
 
     def __str__(self):
         return f"message id = {self.id} on {self.created_at}"
@@ -111,8 +108,4 @@ class Message(models.Model):
 
 #     def __str__(self):
 #         return f"From {self.post} on {self.created}"
-
-#     class Meta:
-#         ordering = ['-created_at']
-
 
