@@ -22,13 +22,13 @@ Samuel Trahan
 
 ---
 
-##Description
+## Description
 
 Assemblr is an application connecting General Assembly students from different programs to each other. Making collaboration and help only a post away.
 
 ---
 
-##Technologies Used
+## Technologies Used
 
 Python
 Django
@@ -41,7 +41,7 @@ SQL
 
 ---
 
-##Getting Started
+## Getting Started
 
 Start off by creating a new user and signing into the app. Once you are signed in, create posts about projects and work that UX Designers and Software Engineers from General Assembly can collaborate on.
 
@@ -53,17 +53,17 @@ The project was deployed using Heroku and can be viewed [here]()
 
 ---
 
-##Screenshots
+## Screenshots
 
 ---
 
-##Credits
+## Credits
 
 CSS Styling: [Materialize](https://materializecss.com/)
 
 ---
 
-##Future Updates
+## Future Updates
 
 - [ ] Implement Upwork API to give users a space to search for freelance work.
 - [ ] Add a messaging API so users can easily interact with each other
