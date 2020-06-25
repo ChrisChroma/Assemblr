@@ -14,10 +14,12 @@
         <p>Job Type: {{ post.genre }}</p>
        
       </div>
-      <div class="card-action">
-        <a href="{% url 'posts_update' post.id %}">Edit</a>
-        <a href="{% url 'posts_delete' post.id %}">Delete</a>
-      </div>
+        {% if user.username == post.user.username %}
+        <div class="card-action">
+            <a href="{% url 'posts_update' post.id %}">Edit</a>
+            <a href="{% url 'posts_delete' post.id %}">Delete</a>
+        </div>
+        {% endif %}
     </div>
     <div class="col s6">
     <form action="{% url 'add_message' post.id %}" method="post">
