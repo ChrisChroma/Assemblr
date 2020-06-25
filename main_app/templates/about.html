@@ -1,11 +1,89 @@
-{% extends 'base.html' %}
-{% block content %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assemblr</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</head>
 
-<h4>About Assemblr</h4>
+<header class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper">
+                <ul>
+                    <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Assemblr</a></li>
+                    <li><img style="margin-left: 160px;" alt="Assemblr Logo" width="50" src={% static '/images/logo.png' %}></li>
+                </ul>
+                <ul class="right">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'index' %}">Posts</a></li>
+                        <li><a href="{% url 'logout' %}">Log Out</a></li>
+                        {% else %}
+                        <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                        <li><a href="{% url 'login' %}">Log In</a></li>
+                        {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+<body>
+<main>
 
-<div class="about">
-<p>Assemblr is a freelance work app that allows General Assembly students from different programs to connect with each other and collaborate on projects.</p>
+
+<h4>About Us</h4>
+<div class="row">
+    <div class="col s6">
+
+
+
+    <div class="carousel carousel-slider">
+    <a class="carousel-item" href="#one!"><img src="{% static '/images/students1.jpg' %}"></a>
+    <a class="carousel-item" href="#one!"><img src="{% static '/images/students2.jpg' %}"></a>
+    <a class="carousel-item" href="#one!"><img src="{% static '/images/students3.jpg' %}"></a>
+    <a class="carousel-item" href="#one!"><img src="{% static '/images/students4.jpg' %}"></a>
+    <a class="carousel-item" href="#one!"><img src="{% static '/images/students5.jpg' %}"></a>
+    <a class="carousel-item" href="#one!"><img src="{% static '/images/students6.jpg' %}"></a>
+    <a class="carousel-item" href="#one!"><img src="{% static '/images/students7.jpg' %}"></a>
+    <a class="carousel-item" href="#one!"><img src="{% static '/images/students8.jpg' %}"></a>
+    <a class="carousel-item" href="#one!"><img src="{% static '/images/students9.jpg' %}"></a>
+    <a class="carousel-item" href="#one!"><img src="{% static '/images/students10.jpg' %}"></a>
+  </div>
+
+
+
+
+    </div>
+    <div class="col s6"><span class="flow-text">
+      <h6>Assemblr is an app that brings together UX Designers &amp; Sofware Engineers from General Assembly programs. Our goal is to connect students who are looking for help on a project or who simply want to lend a helping hand to a fellow GA student. If you need help on a project, simply create a post so others can respond.</h6>
+      <h6>Assemblr also aims to help students beyond their experience at General Assembly. By providing access to a database of freelance job opportunities, Assemblr helps graduates obtain experience while they continue their job search.</h6>
+      </span>
+    </div>
 </div>
 
 
-{% endblock %}
+<script>
+M.AutoInit();
+$('.carousel.carousel-slider').carousel({
+    fullWidth: true
+  });
+setInterval(function(){
+  $('.carousel').carousel('next');
+}, 5000);
+</script>
+</main>
+
+<footer class="page-footer">
+    <div class="footer-copyright">© 2020 Python Pirates</div>
+    <div class=""></div>
+</footer>
+
+</body>
+</html>
