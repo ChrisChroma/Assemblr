@@ -50,12 +50,12 @@
         <br>
         <p>{{ message.comment }}</p>
       </div>
-      {% if user.username == message.user.username %}
-      <div class="card-action">
-        <a style="color: blue" href="{% url 'messages_update' message.id %}">Edit</a>
-        <a style="color: red" href="{% url 'messages_delete' message.id %}">Delete</a>
-      </div>
-      {% endif %}
+        {% if user.username == post.user.username %}
+        <div class="card-action">
+            <a href="{% url 'posts_update' post.id %}">Edit</a>
+            <a href="{% url 'posts_delete' post.id %}">Delete</a>
+        </div>
+        {% endif %}
     </div>
     
   </div>
