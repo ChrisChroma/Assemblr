@@ -9,43 +9,30 @@ body {
     font-family: 'Varela Round', sans-serif;
   }
 
-  main {
+main {
     flex: auto;
+    margin: 20px;
   }
 
-  .page-footer {
+.page-footer {
     background-color: black;
+    margin: 0;
+    padding: 0;
   }
 
-  a {
+a {
       color: white;
   }
 
-  a:hover {
+a:hover {
       color: #E53935;
   }
 
-  .about {
-      margin: 20px;
-  }
-
-  .btn {
+.btn {
     background-color: #E53935;
     margin-bottom: 10px;
   }
 
-  .btn:hover {
+.btn:hover {
     background-color: black;
-  }
-
-  .about-row {
-    display: flex;
-  }
-  
-  .about-column {
-    flex: 50%;
-  }
-
-  .col s6 red {
-    margin: 100px;
   }
