@@ -10,8 +10,7 @@ body {
   }
 
   main {
-    flex: 1 0 auto;
-    margin: 20px;
+    flex: auto;
   }
 
   .page-footer {
@@ -47,6 +46,6 @@ body {
     flex: 50%;
   }
 
-  .col s3 {
-    color: chartreuse;
+  .col s6 red {
+    margin: 100px;
   }
