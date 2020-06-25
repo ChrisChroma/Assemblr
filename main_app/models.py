@@ -90,7 +90,8 @@ class Message(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     # student = models.ForeignKey(Student, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
-    
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
 
     def __str__(self):
         return f"message id = {self.id} on {self.created_at}"
