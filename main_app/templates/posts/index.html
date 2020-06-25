@@ -8,27 +8,26 @@
 <div class="row">
     <div class="col s12 m6">
       <div class="card black darken-1">
-      <a href="{% url 'detail' post.id %}">
-        <div class="card-content white-text">
-          <span class="card-title">{{ post.title }}</span>
-          <p>{{ post.created_at }}</p>
-        </div>
+        <a href="{% url 'detail' post.id %}">
+          <div class="card-content white-text">
+            <span class="card-title">{{ post.title }}</span>
+            <p>{{ post.created_at }}</p>
+          </div>
         </a>
+        {% if user.username == post.user.username %}
         <div class="card-action">
           <a href="{% url 'posts_update' post.id %}">Edit</a>
-        <a href="{% url 'posts_delete' post.id %}">Delete</a>
+          <a href="{% url 'posts_delete' post.id %}">Delete</a>
         </div>
+        {% endif %}
       </div>
     </div>
-  </div>
-  {% endfor %}
+</div>
+
+{% endfor %}
 
 <button type="submit" class="btn">
 <a href="{% url 'posts_create' %}">Create A New Post</a>
 </button>
-
-
-
-
 
 {% endblock %}

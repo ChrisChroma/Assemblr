@@ -100,6 +100,7 @@ def add_message(request, post_id):
     if form.is_valid():
         new_message = form.save(commit=False)
         new_message.post_id = post_id
+        new_message.user = request.user
         new_message.save()
     return redirect('detail', post_id=post_id)
 

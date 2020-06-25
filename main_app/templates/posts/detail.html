@@ -43,52 +43,26 @@
   <div class="col s6">
     <div class="card">
       <div class="card-content">
-        From <span class="card-title" style="color: teal">{{ user.username }}</span>
+        From <span class="card-title" style="color: teal">{{ message.user.username }}</span>
         <p>On {{ post.created_at }}</p>
         <p>Keywords: {{ post.skill }}</p>
         <br>
         <br>
         <p>{{ message.comment }}</p>
       </div>
+      {% if user.username == message.user.username %}
       <div class="card-action">
         <a style="color: blue" href="{% url 'messages_update' message.id %}">Edit</a>
         <a style="color: red" href="{% url 'messages_delete' message.id %}">Delete</a>
       </div>
+      {% endif %}
     </div>
     
   </div>
   {% endfor %}
-  <!-- </div> -->
 
 
   
-
-
-
-<!--   
-  <table class="striped">
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>From</th>
-        <th>Comment</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for message in post.message_set.all %}
-      <tr>
-        <td>{{message.created_at}}</td>
-        <td>{{user.username}}</td>
-        <td>{{message.comment}}</td>
-        <td><a style="color: blue" href="{% url 'messages_update' message.id %}">Edit</a></td>
-        <td><a style="color: red" href="{% url 'messages_delete' message.id %}">Delete</a></td>
-      </tr>
-        {% endfor %}
-      </tbody>
-  </table> -->
-
-
-
 
 
 {% endblock %}
