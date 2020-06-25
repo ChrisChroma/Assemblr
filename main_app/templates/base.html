@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
-
 </head>
 
 <header class="navbar-fixed">
@@ -19,26 +18,34 @@
                     <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Assemblr</a></li>
                 </ul>
                 <ul class="right">
-                    <li><a href="{% url 'index' %}">Posts</a></li>
                     <li><a href="{% url 'about' %}">About</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'index' %}">Posts</a></li>
+                        <li><a href="{% url 'logout' %}">Log Out</a></li>
+                        {% else %}
+                        <li><a href="{% url 'signup' %}">Sign Up</a></li>
+                        <li><a href="{% url 'login' %}">Log In</a></li>
+                        {% endif %}
+                        <li><img alt="Assemblr Logo" width="50" src={% static '/images/logo.png' %}></li>
                 </ul>
             </div>
         </nav>
     </header>
-        
-
 <body>
 
 
 
 <main>
+
         {% block content %}
         {% endblock %}
 </main>
-
 <footer class="page-footer">
-       <div class="left"></div>
-    </footer>
-    
+    <div class="footer-copyright">© 2020 Python Pirates</div>
+    <div class=""></div>
+</footer>
 </body>
 </html>
+
+
+

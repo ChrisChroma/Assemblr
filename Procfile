@@ -1,0 +1,1 @@
+web: gunicorn Assemblr.wsgi

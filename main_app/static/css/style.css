@@ -10,12 +10,11 @@ body {
   }
 
   main {
-    flex: 1 0 auto;
-    margin: 20px;
+    flex: auto;
   }
 
   .page-footer {
-      background-color: black;
+    background-color: black;
   }
 
   a {
@@ -39,6 +38,14 @@ body {
     background-color: black;
   }
 
-
-
+  .about-row {
+    display: flex;
+  }
   
+  .about-column {
+    flex: 50%;
+  }
+
+  .col s6 red {
+    margin: 100px;
+  }
