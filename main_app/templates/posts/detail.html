@@ -39,11 +39,11 @@
       <div class="card-action">
           <a style="color: black;" href="{% url 'posts_update' post.id %}"><i class="material-icons">edit</i></a>
           <a style="color: black;" href="{% url 'posts_delete' post.id %}"><i class="material-icons">delete</i></a>
-{% endif %} 
-{% endfor %}     
       </div>
+{% endif %} 
+{% endfor %}
     </div>
-
 </div>
+
 </main>
 {% endblock %}
