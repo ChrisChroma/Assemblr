@@ -24,7 +24,7 @@
             <li><a href="{% url 'about' %}">About</a></li>
             {% if user.is_authenticated %}
             <li><a href="{% url 'index' %}">All Posts</a></li>
-           
+            <li><a href="{% url 'my_posts' %}">My Posts</a></li>
             <li>Welcome Back <span style="color: red;">{{ user.username }}</span>!</li>
             <li><a href="{% url 'logout' %}">Log Out</a></li>
             {% else %}
