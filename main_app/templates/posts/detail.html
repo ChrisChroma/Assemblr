@@ -12,16 +12,21 @@
         <div class="card-content">
           <span class="card-title">{{ post.title }}</span>
           <p>{{ post.created_at }}</p>
-          <p>Keywords: {{ post.genre }}</p>
+          <p style="color: teal">{{ post.user.username }}</p>
+          <!-- <p>Keywords: {{ post.genre }}</p> -->
+          <!-- Doesn't seem like we will have time to do the search functionality
+          We can always come back and add it -->
           <br>
           <br>
           <p>{{ post.content }}</p>
           
         </div>
+        {% if user.username == post.user.username %}
         <div class="card-action">
           <a href="{% url 'posts_update' post.id %}">Edit</a>
           <a href="{% url 'posts_delete' post.id %}">Delete</a>
         </div>
+        {% endif %}
       </div>
       <div class="col s6">
         <form action="{% url 'add_message' post.id %}" method="post">
@@ -34,61 +39,30 @@
     
     
     
-    {% for message in post.message_set.all %}
     
-   
+    
   </div>
-
- <!-- <div class="row"> -->
+  
+  {% for message in post.message_set.all %}
   <div class="col s6">
     <div class="card">
       <div class="card-content">
-        From <span class="card-title" style="color: teal">{{ user.username }}</span>
+        From <p style="color: teal">{{ message.user }}</p>
         <p>On {{ post.created_at }}</p>
-        <p>Keywords: {{ post.skill }}</p>
+        <!-- <p>Keywords: {{ post.skill }}</p> -->
+        <!-- Doesn't seem like we will have time to do the search functionality
+        We can always come back and add it -->
         <br>
         <br>
         <p>{{ message.comment }}</p>
       </div>
-      <div class="card-action">
-        <a style="color: blue" href="{% url 'messages_update' message.id %}">Edit</a>
-        <a style="color: red" href="{% url 'messages_delete' message.id %}">Delete</a>
-      </div>
+        {% if user.username == message.user.username %}
+        <div class="card-action">
+            <a href="{% url 'messages_update' message.id %}">Edit</a>
+            <a href="{% url 'messages_delete' message.id %}">Delete</a>
+        </div>
+        {% endif %}
     </div>
-    
   </div>
   {% endfor %}
-  <!-- </div> -->
-
-
-  
-
-
-
-<!--   
-  <table class="striped">
-    <thead>
-      <tr>
-        <th>Date</th>
-        <th>From</th>
-        <th>Comment</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for message in post.message_set.all %}
-      <tr>
-        <td>{{message.created_at}}</td>
-        <td>{{user.username}}</td>
-        <td>{{message.comment}}</td>
-        <td><a style="color: blue" href="{% url 'messages_update' message.id %}">Edit</a></td>
-        <td><a style="color: red" href="{% url 'messages_delete' message.id %}">Delete</a></td>
-      </tr>
-        {% endfor %}
-      </tbody>
-  </table> -->
-
-
-
-
-
 {% endblock %}

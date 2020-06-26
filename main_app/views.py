@@ -3,6 +3,8 @@ from django.views.generic import CreateView, UpdateView, DeleteView, DetailView
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 
 # from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -16,7 +18,7 @@ from .forms import MessageForm, StudentForm
 
 # ========= CBV's ===================
 
-class PostCreate(CreateView):
+class PostCreate(LoginRequiredMixin, CreateView):
     model = Post
     fields = ['title', 'content']
     success_url = '/posts/'
@@ -38,22 +40,22 @@ class PostCreate(CreateView):
 
 
 
-class PostUpdate(UpdateView):
+class PostUpdate(LoginRequiredMixin, UpdateView):
     model = Post
     fields = ['title', 'content']
     success_url = '/posts/'
 
 
-class PostDelete(DeleteView):
+class PostDelete(LoginRequiredMixin, DeleteView):
     model = Post
     success_url = '/posts/'
 
 
-class MessageDetail(DetailView):
+class MessageDetail(LoginRequiredMixin, DetailView):
     model = Message
 
 
-class MessageUpdate(UpdateView):
+class MessageUpdate(LoginRequiredMixin, UpdateView):
     model = Message
     fields = ['comment']
 
@@ -61,7 +63,7 @@ class MessageUpdate(UpdateView):
         return reverse('detail', kwargs={'post_id': self.object.post.id})
 
 
-class MessageDelete(DeleteView):
+class MessageDelete(LoginRequiredMixin, DeleteView):
     model = Message
     
     def get_success_url(self):
@@ -69,20 +71,24 @@ class MessageDelete(DeleteView):
 
 # ========= Functions ===================
 
-
+@login_required
 def home(request):
     return render(request, 'home.html')
-
 
 def about(request):
     return render(request, 'about.html')
 
-
+@login_required
 def posts_index(request):
     posts = Post.objects.all()
     return render(request, 'posts/index.html', {'posts': posts})
 
+@login_required
+def my_posts(request):
+    my_posts = Post.objects.filter(user=request.user)
+    return render(request, 'posts/my_posts.html', {'my_posts' : my_posts})
 
+@login_required
 def posts_detail(request, post_id):
     post = Post.objects.get(id=post_id)
     message_form = MessageForm()
@@ -94,16 +100,15 @@ def posts_detail(request, post_id):
 #     message = Message.objects.get(id=message_id)
 #     return render(request, 'yourtemplate', {'post': post, 'message': message})
 
-
+@login_required
 def add_message(request, post_id):
     form = MessageForm(request.POST)
     if form.is_valid():
         new_message = form.save(commit=False)
         new_message.post_id = post_id
+        new_message.user = request.user
         new_message.save()
     return redirect('detail', post_id=post_id)
-
-
 
 def signup(request):
   error_message = ''
