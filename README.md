@@ -55,6 +55,13 @@ The project was deployed using Heroku and can be viewed [here]()
 
 ## Screenshots
 
+![](main_app/static/images/Home.png)
+![](main_app/static/images/Login.png)
+![](main_app/static/images/About.png)
+![](main_app/static/images/ViewPosts.png)
+![](main_app/static/images/NewPost.png)
+![](main_app/static/images/PostDelete.png)
+
 ---
 
 ## Credits
