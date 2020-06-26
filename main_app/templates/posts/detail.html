@@ -7,10 +7,20 @@
       <div class="card-content">
         <span class="card-title">{{ post.title }}</span>
           <p>{{ post.created_at }}</p>
-          <p>Keywords: {{ post.genre }}</p>
+          <p style="color: teal">{{ post.user.username }}</p>
+          <!-- <p>Keywords: {{ post.genre }}</p> -->
+          <!-- Doesn't seem like we will have time to do the search functionality
+          We can always come back and add it -->
           <br>
           <br>
           <p>{{ post.content }}</p>
+        </div>
+        {% if user.username == post.user.username %}
+        <div class="card-action">
+          <a href="{% url 'posts_update' post.id %}">Edit</a>
+          <a href="{% url 'posts_delete' post.id %}">Delete</a>
+        </div>
+        {% endif %}
       </div>
       <div class="card-action">
           <a style="color: black;" href="{% url 'posts_update' post.id %}"><i class="material-icons">edit</i></a>
@@ -22,28 +32,37 @@
           {% csrf_token %}
           {{ message_form.as_p }}
           <input type="submit" class="btn" value="Reply to This Post">
-  </form> 
-
-
-
-{% for message in post.message_set.all %}
+        </form>
+      </div>
+    </div>
+    
+    
+    
+    
+    
+  </div>
+  
+  {% for message in post.message_set.all %}
+  <div class="col s6">
     <div class="card">
       <div class="card-content">
-        From <span class="card-title" style="color: red">{{ message.user.username }}</span>
-        <p class="flow-text" style="font-size: 10px">On {{ post.created_at }}</p>
-        <p class="flow-text" style="font-size: 12px">Keywords: {{ post.skill }}</p>
+        From <p style="color: teal">{{ message.user }}</p>
+        <p>On {{ post.created_at }}</p>
+        <!-- <p>Keywords: {{ post.skill }}</p> -->
+        <!-- Doesn't seem like we will have time to do the search functionality
+        We can always come back and add it -->
+        <br>
         <br>
         <p class="flow-text">{{ message.comment }}</p>
       </div>
-{% if user.username == post.user.username %}
-      <div class="card-action">
-          <a style="color: black;" href="{% url 'posts_update' post.id %}"><i class="material-icons">edit</i></a>
-          <a style="color: black;" href="{% url 'posts_delete' post.id %}"><i class="material-icons">delete</i></a>
-      </div>
-{% endif %} 
-{% endfor %}
+        {% if user.username == message.user.username %}
+        <div class="card-action">
+            <a style="color: black;" href="{% url 'posts_update' post.id %}"><i class="material-icons">edit</i></a>
+            <a style="color: black;" href="{% url 'posts_delete' post.id %}"><i class="material-icons">delete</i></a>
+        </div>
+        {% endif %}
     </div>
-</div>
-
+  </div>
+  {% endfor %}
 </main>
 {% endblock %}
