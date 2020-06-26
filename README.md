@@ -76,5 +76,6 @@ CSS Styling: [Materialize](https://materializecss.com/)
 - [ ] Add a messaging API so users can easily interact with each other
 - [ ] Add GitHub Projects to the app.
 - [ ] Search Functionality to sort through users posts
+- [ ] Scaling for mobile users
 - [ ] Creating a user profile
 - [ ] Add AWS to the project for users posts and profiles.
