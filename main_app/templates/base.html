@@ -13,35 +13,35 @@
 </head>
 
 <header class="navbar-fixed">
-        <nav>
-            <div class="nav-wrapper">
-                <ul>
-                    <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Assemblr</a></li>
-                    <li><img style="margin-left: 160px;" alt="Assemblr Logo" width="50" src={% static '/images/logo.png' %}></li>
-                </ul>
-                <ul class="right">
-                    <li><a href="{% url 'home' %}">Home</a></li>
-                    <li><a href="{% url 'about' %}">About</a></li>
-                    {% if user.is_authenticated %}
-                        <li><a href="{% url 'index' %}">All Posts</a></li>
-                        <li><a href="{% url 'my_posts' %}">My Posts</a></li>
-                        <li><a href="{% url 'logout' %}">Log Out</a></li>
-                        <li>Loggedin as <span class="card-title" style="color: teal">{{ user.username }}</span></li>
-                        {% else %}
-                        <li><a href="{% url 'signup' %}">Sign Up</a></li>
-                        <li><a href="{% url 'login' %}">Log In</a></li>
-                        {% endif %}
-                        
-                </ul>
-            </div>
-        </nav>
+    <nav>
+    <div class="nav-wrapper">
+        <ul>
+            <li><a href="/" class="left brand-logo">&nbsp;&nbsp;Assemblr</a></li>
+            <li><img style="margin-left: 160px;" alt="Assemblr Logo" width="50" src={% static '/images/logo.png' %}></li>
+        </ul>
+        <ul class="right">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'about' %}">About</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'index' %}">All Posts</a></li>
+            <li><a href="{% url 'my_posts' %}">My Posts</a></li>
+            <li>Welcome Back <span style="color: red;">{{ user.username }}</span>!</li>
+            <li><a href="{% url 'logout' %}">Log Out</a></li>
+            {% else %}
+            <li><a href="{% url 'signup' %}">Sign Up</a></li>
+            <li><a href="{% url 'login' %}">Log In</a></li>
+            {% endif %}
+        </ul>
+    </div>
+    </nav>
 </header>
-<body>
 
+<body>
     {% block content %}
     {% endblock %}
 <script type="text/javascript" src="js/materialize.min.js"></script>
 </body>
+
 <footer class="page-footer">
     <div class="footer-copyright">© 2020 Python Pirates</div>
     <div class=""></div>
