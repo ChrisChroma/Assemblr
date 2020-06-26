@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
+<br>
+<button type="submit" class="btn">
+  <a href="{% url 'posts_create' %}">Create a Post</a>
+  </button>
 <main>
 <button type="submit" class="btn">
   <a href="{% url 'posts_create' %}">Create A New Post</a>
