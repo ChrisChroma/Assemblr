@@ -14,7 +14,7 @@ Gabriel Varella
 
 Chris White
 
-[Website]() | [GitHub](https://github.com/ChrisChroma) | [LinkedIn](https://www.linkedin.com/in/chrischromadev/)
+[Website]() | [LinkedIn](https://www.linkedin.com/in/chrischromadev/)
 
 Samuel Trahan
 
@@ -49,7 +49,7 @@ A pitch deck was made to present this project and can be viewed [here](https://d
 
 A Trello Board was used to keep track of development progress and can be viewed [here](https://trello.com/b/3SzsXMa7/assemblr)
 
-The project was deployed using Heroku and can be viewed [here]()
+The project was deployed using Heroku and can be viewed [here](https://asmblr.herokuapp.com/)
 
 ---
 
