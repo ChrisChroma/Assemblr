@@ -21,15 +21,18 @@
                     <li><img style="margin-left: 160px;" alt="Assemblr Logo" width="50" src={% static '/images/logo.png' %}></li>
                 </ul>
                 <ul class="right">
-                <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'home' %}">Home</a></li>
                     <li><a href="{% url 'about' %}">About</a></li>
                     {% if user.is_authenticated %}
-                        <li><a href="{% url 'index' %}">Posts</a></li>
+                        <li><a href="{% url 'index' %}">All Posts</a></li>
+                        <li><a href="{% url 'my_posts' %}">My Posts</a></li>
+                        <li>Welcome Back <span style="color: red;">{{ user.username }}</span>!</li>
                         <li><a href="{% url 'logout' %}">Log Out</a></li>
                         {% else %}
                         <li><a href="{% url 'signup' %}">Sign Up</a></li>
                         <li><a href="{% url 'login' %}">Log In</a></li>
                         {% endif %}
+                        
                 </ul>
             </div>
         </nav>
