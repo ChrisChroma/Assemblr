@@ -78,7 +78,3 @@ CSS Styling: [Materialize](https://materializecss.com/)
 - [ ] Search Functionality to sort through users posts
 - [ ] Creating a user profile
 - [ ] Add AWS to the project for users posts and profiles.
-
-
-
-
